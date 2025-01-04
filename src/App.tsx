@@ -70,7 +70,7 @@ const Home: React.FC = () => {
 };
 
 const SurprisePage: React.FC = () => (
-  <div className="bg-gray-800 min-h-screen flex flex-col items-center justify-center text-white">
+  <div className="bg-slate-800 min-h-screen flex flex-col items-center justify-center text-white">
     <div className="flex text-center">
       <CarouselPlugin />
     </div>
