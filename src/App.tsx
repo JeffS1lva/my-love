@@ -124,7 +124,7 @@ const SurprisePage: React.FC = () => (
         Com você eu aprendi o que é amar e permitir também ser amado. Você é uma mulher incrível e é com você que quero
         passar o resto dos meus dias! Te amo ♥.
       </p>
-      <h3 className="text-center mt-10 text-lg text-white font-thin">Compartilhando momentos há:</h3>
+      <h3 className="text-center mt-10 text-lg text-white font-semibold">Compartilhando momentos há:</h3>
       <CronometroTempo />
       <MusicPlayer />
     </div>
