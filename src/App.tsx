@@ -58,7 +58,7 @@ const CronometroTempo: React.FC = () => {
 const Home: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <div className="bg-gray-800 min-h-screen flex flex-col items-center justify-center text-white">
+    <div className="bg-slate-800 min-h-screen flex flex-col items-center justify-center text-white">
       <button
         className="bg-red-500 text-white font-bold py-3 px-6 rounded hover:bg-red-600"
         onClick={() => navigate("/surprise")}
