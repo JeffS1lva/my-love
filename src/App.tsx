@@ -8,6 +8,7 @@ const CronometroTempo: React.FC = () => {
   const dataInicio = new Date("2024-12-04T00:00:00");
 
   const [tempo, setTempo] = React.useState({
+    meses: 0,
     dias: 0,
     horas: 0,
     minutos: 0,
@@ -17,14 +18,48 @@ const CronometroTempo: React.FC = () => {
   React.useEffect(() => {
     const calcularTempo = () => {
       const agora = new Date();
-      const diffTime = agora.getTime() - dataInicio.getTime();
 
-      const dias = Math.floor(diffTime / (1000 * 3600 * 24));
-      const horas = Math.floor((diffTime % (1000 * 3600 * 24)) / (1000 * 3600));
-      const minutos = Math.floor((diffTime % (1000 * 3600)) / (1000 * 60));
-      const segundos = Math.floor((diffTime % (1000 * 60)) / 1000);
+      let anos = agora.getFullYear() - dataInicio.getFullYear();
+      let meses = agora.getMonth() - dataInicio.getMonth();
+      let dias = agora.getDate() - dataInicio.getDate();
+      let horas = agora.getHours() - dataInicio.getHours();
+      let minutos = agora.getMinutes() - dataInicio.getMinutes();
+      let segundos = agora.getSeconds() - dataInicio.getSeconds();
 
-      setTempo({ dias, horas, minutos, segundos });
+      // Ajustando valores negativos
+      if (segundos < 0) {
+        segundos += 60;
+        minutos -= 1;
+      }
+      if (minutos < 0) {
+        minutos += 60;
+        horas -= 1;
+      }
+      if (horas < 0) {
+        horas += 24;
+        dias -= 1;
+      }
+      if (dias < 0) {
+        const ultimoDiaMesAnterior = new Date(
+          agora.getFullYear(),
+          agora.getMonth(),
+          0
+        ).getDate();
+        dias += ultimoDiaMesAnterior;
+        meses -= 1;
+      }
+      if (meses < 0) {
+        meses += 12;
+        anos -= 1;
+      }
+
+      setTempo({
+        meses: anos * 12 + meses,
+        dias,
+        horas,
+        minutos,
+        segundos,
+      });
     };
 
     const intervalo = setInterval(calcularTempo, 1000);
@@ -34,7 +69,11 @@ const CronometroTempo: React.FC = () => {
   }, [dataInicio]);
 
   return (
-    <div className="grid grid-cols-2 gap-4 text-center mt-4 font-secondFont">
+    <div className="grid grid-cols-2 gap-3 text-center mt-4 font-secondFont">
+      <div className="text-white bg-slate-950 rounded-md p-3 border-4 border-transparent shadow-md shadow-emerald-500">
+        <p className="text-xl font-thin">{tempo.meses}</p>
+        <p className="text-sm">Mês</p>
+      </div>
       <div className="text-white bg-slate-950 rounded-md p-3 border-4 border-transparent shadow-md shadow-emerald-500">
         <p className="text-xl font-thin">{tempo.dias}</p>
         <p className="text-sm">Dias</p>
@@ -50,6 +89,10 @@ const CronometroTempo: React.FC = () => {
       <div className="text-white bg-slate-950 rounded-md p-3 border-4 border-transparent shadow-md shadow-emerald-500">
         <p className="text-xl font-thin">{tempo.segundos}</p>
         <p className="text-sm">Segundos</p>
+      </div>
+      <div className="text-white bg-slate-950 rounded-md p-3 border-4 border-transparent shadow-md shadow-emerald-500">
+      <p className="text-xl text-center font-thin ml-3">Futuro💭</p>
+      <p className="text-sm">digitando...</p>
       </div>
     </div>
   );
