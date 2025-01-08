@@ -92,7 +92,7 @@ const CronometroTempo: React.FC = () => {
       </div>
       <div className="text-white bg-slate-950 rounded-md p-3 border-4 border-transparent shadow-md shadow-emerald-500">
       <p className="text-xl text-center font-thin ml-3">Futuro💭</p>
-      <p className="text-sm">digitando...</p>
+      <p className="text-sm">espero um dia voltar...</p>
       </div>
     </div>
   );
